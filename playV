@@ -1,5 +1,5 @@
 #!/bin/bash
-#this is a shell for play anime videos.
+#this is a shell for playing anime videos.
 #maplebeats'shell
 
 temp_file=/tmp/cdb.$$
