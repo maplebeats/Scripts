@@ -5,13 +5,16 @@
 temp_file=/tmp/cdb.$$
 
 video_time(){
-  echo -e "请输入片头曲完的时间点 "
-  read x
-  echo -e "请输入片尾曲开始的时间分钟,"
-  read y
-  echo -e "请输入片尾曲开始的时间秒,"
-  read z
-  end_time=`expr 60 \* $y + $z - $x`
+  echo -e "请输入片头曲完的时间分钟"
+  read open_time_min
+  echo -e "请输入片头曲完的时间秒"
+  read open_time_sed
+  open_time=`expr 60 \* $open_time_min + $open_time_sed`
+  echo -e "请输入片尾曲开始的时间分钟"
+  read end_time_min
+  echo -e "请输入片尾曲开始的时间秒"
+  read end_time_sed
+  end_time=`expr 60 \* $end_time_min + $end_time_sed - $open_time`
 return 0
 }
 
@@ -21,11 +24,11 @@ find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' 
 }
 
 skip_open(){
-  exec mplayer -fs -ss $x -playlist anime.lst >>/dev/null
+  exec mplayer -fs -ss $open_time -playlist anime.lst >>/dev/null
 return 0
 }
 skip_end(){
-sleep $end_time && killall mplayer && sed -i '1d' anime.lst &&play_video >>/dev/null
+sleep $end_time && killall mplayer >>/dev/null && sed -i '1d' anime.lst &&play_video >>/dev/null
 return 0
 }
 
