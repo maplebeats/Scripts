@@ -28,7 +28,7 @@ skip_open(){
 return 0
 }
 skip_end(){
-sleep $end_time && killall mplayer >/dev/null 2>$1 && sed -i '1d' anime.lst &&play_video >/dev/null
+sleep $end_time && killall mplayer >/dev/null 2>&1 && sed -i '1d' anime.lst &&play_video >/dev/null
 return 0
 }
 
