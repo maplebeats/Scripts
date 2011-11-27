@@ -24,11 +24,11 @@ find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' 
 }
 
 skip_open(){
-  exec mplayer -fs -ss $open_time -playlist anime.lst >>/dev/null
+  exec mplayer -fs -ss $open_time -playlist anime.lst >/dev/null 2>&1
 return 0
 }
 skip_end(){
-sleep $end_time && killall mplayer >>/dev/null && sed -i '1d' anime.lst &&play_video >>/dev/null
+sleep $end_time && killall mplayer >/dev/null 2>$1 && sed -i '1d' anime.lst &&play_video >/dev/null
 return 0
 }
 
@@ -38,7 +38,8 @@ if [ -s anime.lst ];then
   skip_open
 else
 rm -rf anime.lst
-exit 0
+echo "播放完成!"
+quit
 fi
 }
 
@@ -60,5 +61,3 @@ else
 	play_video
 fi
 exit 0
-
-
