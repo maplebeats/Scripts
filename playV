@@ -36,7 +36,7 @@ if [ -s anime.lst ];then
   skip_end& 
   skip_open
 else
-rm -rf anime.lst
+rm -f anime.lst
 echo "播放完成!"
 quit
 fi
