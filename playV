@@ -5,16 +5,14 @@
 temp_file=/tmp/cdb.$$
 
 video_time(){
-  echo -e "请输入片头曲完的时间(分钟)"
-  read open_time_min
-  echo -e "请输入片头曲完的时间(秒)"
-  read open_time_sed
+	echo -e "at frist,you should cd in your video directory"
+	echo -e "please input the period at the end of OP(Separated by Spaces)"
+  read open_time_min open_time_sed
   open_time=`expr 60 \* $open_time_min + $open_time_sed`
-  echo -e "请输入片尾曲开始的时间(分钟)"
-  read end_time_min
-  echo -e "请输入片尾曲开始的时间(秒)"
-  read end_time_sed
+  echo -e "please input the period at the open of ED(Separated by Spaces)"
+  read end_time_min end_time_sed
   end_time=`expr 60 \* $end_time_min + $end_time_sed - $open_time`
+  echo "the mplayer will play $open_time_min : $open_time_sed to $end_time_min : $end_time_sed"
 return 0
 }
 
@@ -37,8 +35,8 @@ if [ -s anime.lst ];then
   skip_open
 else
 rm -f anime.lst
-echo "播放完成!"
-quit
+echo "end of the videos!"
+exit 0
 fi
 }
 
