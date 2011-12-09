@@ -5,7 +5,6 @@
 temp_file=/tmp/cdb.$$
 
 video_time(){
-	echo -e "at frist,you should cd in your video directory"
 	echo -e "please input the period at the end of OP(Separated by Spaces)"
   read open_time_min open_time_sed
   open_time=`expr 60 \* $open_time_min + $open_time_sed`
@@ -49,6 +48,18 @@ else
 fi
 }
 
+ln_shell(){
+if [ -f /usr/bin/playV ]
+then
+	echo "let's begin"
+else
+	echo "move the shell to /usr/bin(need root)"
+	sudo cp ./playV /usr/bin
+	#sudo ln -s ./playV /usr/bin/playV
+fi
+}
+
+ln_shell
 video_time                      
 if lst_presence         
 then
