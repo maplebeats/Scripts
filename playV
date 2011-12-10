@@ -26,7 +26,6 @@ video_time(){
 	  open_time=${array[0]}
 	  end_time=${array[1]}
   fi
-return 0
 }
 
 creat_lst () {                      
@@ -53,15 +52,6 @@ exit 0
 fi
 }
 
-lst_presence(){                       
-if [ -f ./anime.lst ]
-then 
- return 0
-else
- return 1
-fi
-}
-
 ln_shell(){
 if [ -f /usr/bin/playV ]
 then
@@ -76,11 +66,10 @@ fi
 
 ln_shell
 video_time                      
-if lst_presence         
+if [ -f ./anime.lst ]        
 then
   	play_video
 else
  	creat_lst
 	play_video
 fi
-exit 0
