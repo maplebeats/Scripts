@@ -5,7 +5,7 @@
 temp_file=/tmp/cdb.$$
 
 video_time(){
-	if [ ! -f ./anime.tmp ];then
+	if [ ! -f ./anime.tm ];then
   echo -e "please input the period at the end of OP(Separated by Spaces)"
   read open_time_min open_time_sed
   open_time=`expr 60 \* $open_time_min + $open_time_sed`
@@ -28,7 +28,8 @@ video_time(){
   fi
 }
 
-creat_lst () {                      
+creat_lst () {
+rm -f $temp_file
 find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' -c 'w '$temp_file'' -c 'q' - && cat $temp_file >anime.lst && rm $temp_file
 #find . \( -name "*.rmvb" \) -type f | sort > anime.lst
 }
