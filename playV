@@ -6,16 +6,16 @@ temp_file=/tmp/cdb.$$
 
 video_time(){
 	if [ ! -f ./anime.tm ];then
-  echo -e "please input the period at the end of OP(Separated by Spaces)"
-  read open_time_min open_time_sed
-  open_time=`expr 60 \* $open_time_min + $open_time_sed`
-  echo $open_time >anime.tm
-  echo -e "please input the period at the open of ED(Separated by Spaces)"
-  read end_time_min end_time_sed 
-  end_time=`expr 60 \* $end_time_min + $end_time_sed - $open_time`
-  echo $end_time >>anime.tm
-  echo "the mplayer will play $open_time_min : $open_time_sed to $end_time_min : $end_time_sed"
-  else
+		echo -e "please input the period at the end of OP(Separated by Spaces)"
+		read open_time_min open_time_sed
+		open_time=`expr 60 \* $open_time_min + $open_time_sed`
+		echo $open_time >anime.tm
+		echo -e "please input the period at the open of ED(Separated by Spaces)"
+		read end_time_min end_time_sed 
+		end_time=`expr 60 \* $end_time_min + $end_time_sed - $open_time`
+		echo $end_time >>anime.tm
+		echo "the mplayer will play $open_time_min : $open_time_sed to $end_time_min : $end_time_sed"
+	else
 	  cat anime.tm > $temp_file 
 	  n=0
 	  while read line
@@ -29,28 +29,28 @@ video_time(){
 }
 
 creat_lst () {
-rm -f $temp_file
-find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' -c 'w '$temp_file'' -c 'q' - && cat $temp_file >anime.lst && rm $temp_file
-#find . \( -name "*.rmvb" \) -type f | sort > anime.lst
+	rm -f $temp_file
+	find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' -c 'w '$temp_file'' -c 'q' - && cat $temp_file >anime.lst && rm $temp_file
+	#find . \( -name "*.rmvb" \) -type f | sort > anime.lst
 }
 
 skip_open(){
-mplayer -fs -ss $open_time -playlist anime.lst >/dev/null 2>&1
+	mplayer -fs -ss $open_time -playlist anime.lst >/dev/null 2>&1
 }
 
 skip_end(){
-sleep $end_time && killall mplayer >/dev/null 2>&1 && sed -i '1d' anime.lst && play_video >/dev/null
+	sleep $end_time && killall mplayer >/dev/null 2>&1 && sed -i '1d' anime.lst && play_video >/dev/null
 }
 
 play_video(){
-if [ -s anime.lst ];then         
-  skip_end& 
-  skip_open
-else
-rm -f anime.lst
-echo "end of the videos!"
-exit 0
-fi
+	if [ -s anime.lst ];then         
+		skip_end& 
+		skip_open
+	else
+		rm -f anime.lst
+		echo "end of the videos!"
+		exit 0
+	fi
 }
 
 ln_shell(){
@@ -69,7 +69,7 @@ ln_shell
 video_time                      
 if [ -f ./anime.lst ]        
 then
-  	play_video
+	play_video
 else
  	creat_lst
 	play_video
