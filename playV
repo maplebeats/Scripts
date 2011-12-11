@@ -16,13 +16,12 @@ video_time(){
 		echo $end_time >>anime.tm
 		echo "the mplayer will play $open_time_min : $open_time_sed to $end_time_min : $end_time_sed"
 	else
-	  cat anime.tm > $temp_file 
 	  n=0
 	  while read line
 	  do
 		  array[$n]=$line
 		  ((n++))
-	  done < $temp_file
+	  done < anime.tm
 	  open_time=${array[0]}
 	  end_time=${array[1]}
   fi
@@ -59,9 +58,16 @@ then
 	echo "let's begin"
 else
 	echo "move the shell to /usr/bin(need root)(yes/no?)"
-	sudo cp ./playV /usr/bin
-	#sudo ln -s ./playV /usr/bin/playV
-	echo "Ok!let's begin"
+	read ans
+	case "$ans" in
+		yes | Y | Yes | YES )
+		sudo cp ./playV /usr/bin
+		#sudo ln -s ./playV /usr/bin/playV
+		echo "Ok!let's begin" ;;
+		n* | N* )	echo "let'go !" ;;
+		* )		echo "sorry,answer no recognized";;
+	esac
+
 fi
 }
 
