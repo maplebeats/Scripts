@@ -1,9 +1,18 @@
 #!/bin/bash
 dir=~/works/maplebeats.github.com
 flash_time=5
+refresh(){
+	jekyll
+}
 cd $dir
-while : 
+echo "正在以 $flash_time s刷新jekyll文件"
+refresh
+echo " 第1次刷新"
+n=2
+while :
 do
 	sleep $flash_time
-	jekyll -pygments >/dev/null 2>&1
+	refresh
+	echo "第$n次刷新"
+	((n++))
 done
