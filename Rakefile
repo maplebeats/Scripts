@@ -1,15 +1,15 @@
 #!/bin/bash
-
+LANG=zh
 dir=~/works/maplebeats.github.com/_posts
 cd $dir
 temp=/tmp/post.$$
-editor=vi
+editor=gedit
 
-date +%y-%m-%d >$temp
+date +%F >$temp
 echo $*.textile >>$temp
-xargs -n10 <$temp |tee $temp
+xargs <$temp |tee $temp
 cat $temp|sed '/ \+/s//-/g' |tee $temp
-touch "`cat $temp`"
+touch `cat $temp`
 #generate_filename ()
 #{
 #    echo -n `LANG=C date +%F`-"$1".textile
