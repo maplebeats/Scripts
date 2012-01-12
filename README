@@ -1,2 +1,3 @@
 playV --play videos
 flash_jekyll --refresh jekyll's html files
+Rakefile --add new post to my blog
