@@ -1,0 +1,9 @@
+#!/bin/bash
+dir=~/works/maplebeats.github.com
+flash_time=5
+cd $dir
+while : 
+do
+	sleep $flash_time
+	jekyll -pygments >/dev/null 2>&1
+done
