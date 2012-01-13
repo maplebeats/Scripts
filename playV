@@ -1,5 +1,4 @@
 #!/bin/bash
-#this is a shell for playing anime videos.
 #maplebeats'shell
 
 temp_file=/tmp/cdb.$$
@@ -28,7 +27,6 @@ video_time(){
 }
 
 creat_lst () {
-	rm -f $temp_file
 	find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' -c 'w '$temp_file'' -c 'q' - && cat $temp_file >anime.lst && rm $temp_file
 	#find . \( -name "*.rmvb" \) -type f | sort > anime.lst
 }

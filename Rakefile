@@ -26,4 +26,7 @@ summary: $post_summary
 ---
 " >`cat $temp`
 $editor `cat $temp`
+git add .
+git commit -a -m 'new post'
+git push
 exit 0
