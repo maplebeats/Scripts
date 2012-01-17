@@ -26,7 +26,15 @@ summary: $post_summary
 ---
 " >`cat $temp`
 $editor `cat $temp`
-git add .
-git commit -a -m 'new post'
-git push
+echo "Are you sure to push to github?(N)"
+read ans
+case "$ans" in 
+	n* | N* )
+		exit 0
+		;;
+	*)
+		git add .
+		git commit -a -m 'new post'
+		git push
+		;;
 exit 0
