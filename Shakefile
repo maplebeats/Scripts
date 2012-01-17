@@ -37,4 +37,5 @@ case "$ans" in
 		git commit -a -m 'new post'
 		git push
 		;;
+esac
 exit 0
