@@ -1,5 +1,8 @@
 #!/bin/bash
 
+dname=$(basename "$1")
+d_name=${dname%.*}
+
 case $1 in 
 	*.tar.bz2 | *.tbz2)
 		tar xvjf "$1"
@@ -11,9 +14,12 @@ case $1 in
 		tar xvJf "$1"
 		;;
 	*.rar)
-		unrar e "$1"
+		mkdir "$d_name"
+		cd "$d_name"
+		unrar e ../$1
 		;;
 	*.zip | *.7z)
-		unzip "$1"
+		mkdir "$d_name"
+		unzip "$1" -d ./$d_name
 esac
 
