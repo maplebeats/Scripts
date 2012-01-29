@@ -10,24 +10,17 @@ echo $*.textile >>$temp
 xargs <$temp |tee $temp
 cat $temp|sed '/ \+/s//-/g' |tee $temp
 touch `cat $temp`
-#generate_filename ()
-#{
-#    echo -n `LANG=C date +%F`-"$1".textile
-#}
-#touch "`generate_filename miku`"
 echo "输入文章title"
 read post_title
-echo "输入文章summary"
-read post_summary
 echo "---
 layout: post
 title: $post_title
-summary: $post_summary
 ---
 " >`cat $temp`
 $editor `cat $temp`
 echo "Are you sure to push to github?(N)"
 read ans
+echo "<p class=date>Posted on `date +%c` by <a href=http://maplebeats.com/me>maplebeats</a></p>" >> `cat $temp`
 case "$ans" in 
 	n* | N* )
 		exit 0
