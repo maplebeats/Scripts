@@ -27,7 +27,7 @@ video_time(){
 }
 
 creat_lst () {
-	find . \( -name "*.rmvb" -or -name "*.mp4" \) -type f | vim -c 'sort nr /\d\+/' -c 'w '$temp_file'' -c 'q' - && cat $temp_file >anime.lst && rm $temp_file
+	find . \( -name "*.rmvb" -or -name "*.mkv" \) -type f | vim -c 'sort nr /\d\+/' -c 'w '$temp_file'' -c 'q' - && cat $temp_file >anime.lst && rm $temp_file
 	#find . \( -name "*.rmvb" \) -type f | sort > anime.lst
 }
 
@@ -50,26 +50,6 @@ play_video(){
 	fi
 }
 
-ln_shell(){
-if [ -f /usr/bin/playV ]
-then
-	echo "let's begin"
-else
-	echo "move the shell to /usr/bin(need root)(yes/no?)"
-	read ans
-	case "$ans" in
-		yes | Y | Yes | YES )
-		sudo cp ./playV /usr/bin
-		#sudo ln -s ./playV /usr/bin/playV
-		echo "Ok!let's begin" ;;
-		n* | N* )	echo "let'go !" ;;
-		* )		echo "sorry,answer no recognized";;
-	esac
-
-fi
-}
-
-ln_shell
 video_time                      
 if [ -f ./anime.lst ]        
 then
