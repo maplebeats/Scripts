@@ -24,7 +24,7 @@ case "$ans" in
 		exit 0
 		;;
 	*)
-		git add .
+		git add `date +%F-$name_file.textile`
 		git commit -a -m 'new post'
 		git push
 		;;
