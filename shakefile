@@ -1,0 +1,32 @@
+#!/bin/bash
+LANG=zh
+dir=~/works/maplebeats.github.com/_posts
+cd $dir
+temp=/tmp/post.$$
+editor=vi
+
+echo "input file name"
+read name_file
+echo "input title"
+read post_title
+echo "---
+layout: post
+title: $post_title
+---
+" > `date +%F-$name_file.textile`
+vi `date +%F-$name_file.textile`
+
+echo "Are you sure to push to github?(N)"
+read ans
+echo "<p class=date>Posted on `date +%c` by \"maplebeats\":http://maplebeats.com/me</p>" >> `date +%F-$name_file.textile`
+case "$ans" in 
+	n* | N* )
+		exit 0
+		;;
+	*)
+		git add .
+		git commit -a -m 'new post'
+		git push
+		;;
+esac
+exit 0
