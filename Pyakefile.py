@@ -6,28 +6,31 @@ def creatfile():
 	time_file = time.strftime(time_format, time.localtime())
 	title_file = raw_input("link title:")
 	file_name = time_file + title_file + '.textile'
+	d_file = "/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name
 	print time_file + title_file
-	f = file("/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name,'w')
-	return file_name
+	f = file(d_file,'w')
+	return d_file
 
-def writefile(file_name):
+def writefile(d_file):
 	post_title = raw_input("title:")
-	f = open("/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name,'w')
+	f = open(d_file,'w')
 	f.write('---\nlayout: post\ntitle: ' + post_title + '\n---\n')
 	f.close()
-	os.system("gedit /home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name)
-	time_format = "%Y-%m-%d %X"
-	post_time = time.strftime(time_format, time.localtime())
-	f = open("/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name,'a')
-	f.write('<p class=date>Posted on %s by \"maplebeats\":http://maplebeats.com/me</p>' % post_time)
+	os.system("gedit %s" % d_file)
+	f = open(d_file,'a')
+	f.write('<p class=date>Posted on %s by \"maplebeats\":http://maplebeats.com/me</p>' %
+			time.asctime())
 	f.close()
-	return file_name
 
+def pushfile():
+	qus = raw_input("are you sure to push to github?")
+	ans = [Y,y,Yes,yes]
+	if qus in ans:
+		os.system("cd ~/works/maplebeats.github.com/ && git add . && git commit -a -m 'new post' && git push")
+	else:
+		pass
 
-def pushfile(file_name):
-	pass
-	os.system("cd ~/works/maplebeats.github.com/ && git add . && git commit -a -m 'new post' && git push")
-
-pushfile(writefile(creatfile()))
+writefile(creatfile())
+pushfile()
 
 
