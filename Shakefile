@@ -27,7 +27,7 @@ case "$ans" in
 		;;
 	*)
 		git add .
-		git commit -a -m 'new post'
+		git commit -a -m "`date` $*"
 		git push
 		;;
 esac
