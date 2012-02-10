@@ -24,7 +24,7 @@ def writefile(d_file):
 
 def pushfile():
 	qus = raw_input("are you sure to push to github?")
-	ans = [Y,y,Yes,yes]
+	ans = ['Y','y','Yes','yes']
 	if qus in ans:
 		os.system("cd ~/works/maplebeats.github.com/ && git add . && git commit -a -m 'new post' && git push")
 	else:
