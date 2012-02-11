@@ -7,7 +7,6 @@ def creatfile():
 	title_file = raw_input("link title:")
 	file_name = time_file + title_file + '.textile'
 	d_file = "/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name
-	print time_file + title_file
 	f = file(d_file,'w')
 	return d_file
 
