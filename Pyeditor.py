@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-#coding:utf-8 
-import os,time,wx
+# -*- coding: utf-8 -*-
+import os,time,wx,sys
 
 def savefile(event):
 	time_format = "%Y-%m-%d-"
@@ -8,10 +8,11 @@ def savefile(event):
 	file_name = time_file + titlefile.GetValue() + '.textile'
 	d_file = "/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name
 	f = open(d_file,'w')
-	f.write('---\nlayout: post\ntitle: ' + titlefile.GetValue() + '\n---\n' + contents.GetValue())
+	f.write('---\nlayout: post\ntitle: ' + titlefile.GetValue().encode('utf8') + '\n---\n' +
+			contents.GetValue().encode('utf8'))
 	f.close()
 	f = open(d_file,'a')
-	f.write('<p class=date>Posted on %s by \"maplebeats\":http://maplebeats.com/me</p>' %
+	f.write('\n<p class=date>Posted on %s by \"maplebeats\":http://maplebeats.com/me</p>' %
 			time.asctime())
 	f.close()
 
