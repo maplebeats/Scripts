@@ -5,7 +5,7 @@ import os,time,wx,sys
 def savefile(event):
 	time_format = "%Y-%m-%d-"
 	time_file = time.strftime(time_format, time.localtime())
-	file_name = time_file + titlefile.GetValue() + '.textile'
+	file_name = time_file + linktitle.GetValue() + '.textile'
 	d_file = "/home/maplebeats/works/maplebeats.github.com/_posts/%s" % file_name
 	f = open(d_file,'w')
 	f.write('---\nlayout: post\ntitle: ' + titlefile.GetValue().encode('utf8') + '\n---\n' +
@@ -29,15 +29,21 @@ saveButton.Bind(wx.EVT_BUTTON,savefile)
 pushButton = wx.Button(bkg,label='push')
 pushButton.Bind(wx.EVT_BUTTON,pushfile)
 
+linktitle = wx.TextCtrl(bkg)
 titlefile = wx.TextCtrl(bkg)
 contents = wx.TextCtrl(bkg,style=wx.TE_MULTILINE | wx.HSCROLL)
 
+tbox = wx.BoxSizer()
+tbox.Add(linktitle,proportion=3,flag=wx.EXPAND)
+tbox.Add(saveButton,proportion=1,flag=wx.LEFT,border=5)
+
 hbox = wx.BoxSizer()
 hbox.Add(titlefile,proportion=3,flag=wx.EXPAND)
-hbox.Add(saveButton,proportion=1,flag=wx.LEFT,border=5)
 hbox.Add(pushButton,proportion=1,flag=wx.LEFT,border=5)
 
+
 vbox = wx.BoxSizer(wx.VERTICAL)
+vbox.Add(tbox,proportion=0,flag=wx.LEFT,border=5)
 vbox.Add(hbox,proportion=0,flag=wx.LEFT,border=5)
 vbox.Add(contents,proportion=1,
 		flag=wx.EXPAND | wx.LEFT | wx.BOTTOM | wx.RIGHT,border=5)
