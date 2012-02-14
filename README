@@ -1,4 +1,4 @@
 playV --play videos
 flash_jekyll --refresh jekyll's html files
-Shakefile/shakefile/Pyakefile.py/pyditor(gui) --add new post to my blog
+Shakefile/shakefile/Pyakefile.py/pyeditor(gui) --add new post to my blog
 extract --extract archive

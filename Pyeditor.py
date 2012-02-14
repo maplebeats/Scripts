@@ -41,7 +41,6 @@ hbox = wx.BoxSizer()
 hbox.Add(titlefile,proportion=3,flag=wx.EXPAND)
 hbox.Add(pushButton,proportion=1,flag=wx.LEFT,border=5)
 
-
 vbox = wx.BoxSizer(wx.VERTICAL)
 vbox.Add(tbox,proportion=0,flag=wx.LEFT,border=5)
 vbox.Add(hbox,proportion=0,flag=wx.LEFT,border=5)
