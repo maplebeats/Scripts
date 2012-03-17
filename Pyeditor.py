@@ -17,7 +17,8 @@ def savefile(event):
 	f.close()
 
 def pushfile(event):
-	os.system("cd ~/works/maplebeats.github.com/ && git add . && git commit -a -m 'new post' && git push")
+	os.system("cd ~/works/maplebeats.github.com/ && git add . && git commit -a -m 'New post on %s' && git push"
+			% time.asctime)
 
 app = wx.App()
 win = wx.Frame(None,title="Pyakefile Editor",size=(800,500))
