@@ -3,3 +3,4 @@ flash_jekyll --refresh jekyll's html files
 Shakefile/shakefile/Pyakefile.py/pyeditor(gui) --add new post to my blog
 extract --extract archive
 xunfeng.py --download all the li xian tasks
+RmColon.py --rename a file without ':'
