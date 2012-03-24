@@ -14,7 +14,7 @@ class XF:
                 'Referer':'http://ptlogin2.qq.com/login?u=445644667&p=11BDE88FB5BA931B10B808976DD6308D&verifycode=!ERV&aid=567008010&u1=http%3A%2F%2Flixian.qq.com%2Fmain.html&h=1&ptredirect=1&ptlang=2052&from_ui=1&dumy=&fp=loginerroralert&action=2-6-36444&mibao_css='\
     }
     __cookiepath = '/tmp/cookie'
-    __downpath = '/home/maplebeats/downloads/xuanfeng.down'
+    __downpath = '/home/maplebeats/Downloads/xuanfeng.down'
     __qq = None
     __pswd = None
     __verifycode = None
