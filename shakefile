@@ -3,7 +3,7 @@ LANG=zh
 dir=~/works/maplebeats.github.com/_posts
 cd $dir
 temp=/tmp/post.$$
-editor=vi
+editor=gedit
 
 echo "input file name"
 read name_file
@@ -14,7 +14,7 @@ layout: post
 title: $post_title
 ---
 " > `date +%F-$name_file.textile`
-vi `date +%F-$name_file.textile`
+$editor `date +%F-$name_file.textile`
 
 echo "Are you sure to push to github?(N)"
 read ans
@@ -25,7 +25,7 @@ case "$ans" in
 		;;
 	*)
 		git add `date +%F-$name_file.textile`
-		git commit -a -m 'new post'
+		git commit -a -m "`date` $post_title'
 		git push
 		;;
 esac
