@@ -25,7 +25,7 @@ case "$ans" in
 		;;
 	*)
 		git add `date +%F-$name_file.textile`
-		git commit -a -m "`date` $post_title'
+		git commit -a -m "`date` $post_title"
 		git push
 		;;
 esac
