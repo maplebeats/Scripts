@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 import hashlib
 from urllib import request,parse
 from http import cookiejar
@@ -157,6 +157,7 @@ class XF:
             for num in range(len(self.filename)):
                     f.write(self.filehttp[num] + '\n  header=Cookie: FTN5K=' + self.filecom[num] +
                     '\n  continue=true\n  max-conection-per-server=5\n  split=10\n   parameterized-uri=true\n\n')
+            f.close
                     
     def __download(self):
             """
