@@ -111,7 +111,8 @@ class XF:
             self.__getlist()
             self.__gethttp()
             self.__creatfile()
-            self.__download()
+            self.__deltask()
+            #self.__download()
         elif str.find('不正确') != -1:
             print('你输入的帐号或者密码不正确，请重新输入。')
         else:
@@ -131,9 +132,11 @@ class XF:
             str = json.JSONDecoder().decode(str)
             self.filename = []
             self.filehash = []
+            self.filemid = []
             for num in range(len(str['data'])):
                     self.filename.append(str['data'][num]['file_name'])
                     self.filehash.append(str['data'][num]['hash'])
+                    self.filemid.append(str['data'][num]['mid'])
                     print(self.filename[num])
 
     def __gethttp(self):
@@ -158,6 +161,15 @@ class XF:
                     f.write(self.filehttp[num] + '\n  header=Cookie: FTN5K=' + self.filecom[num] +
                     '\n  continue=true\n  max-conection-per-server=5\n  split=10\n   parameterized-uri=true\n\n')
             f.close
+            print("aria2文件建立")
+
+    def __deltask(self):
+            urlv = 'http://lixian.qq.com/handler/lixian/del_lixian_task.php'
+            print("清空任务ing")
+            for num in range(len(self.filename)):
+                    data = {'mids':self.filemid[num]}
+                    str = self.__request(urlv,'POST',data)
+            print("任务删除完成")
                     
     def __download(self):
             """
