@@ -5,3 +5,4 @@ extract                     --extract archive
 xuanfeng.py                 --download all the li xian tasks
 RmColon.py                  --rename a file without ':'
 tab2space.py                --tab=4spaces
+postimg.py                  --rm flickr img label
