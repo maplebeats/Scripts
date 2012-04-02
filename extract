@@ -2,24 +2,22 @@
 
 dname=$(basename "$1")
 d_name=${dname%.*}
-
+[ -d "$d_name" ] && echo "已经解压过了" && exit 0
+mkdir "$d_name" && cd "$d_name"
 case $1 in 
 	*.tar.bz2 | *.tbz2)
-		tar xvjf "$1"
+		tar xvjf ../"$1"
 		;;
 	*.tar.gz | *.tgz)
-		tar xvzf "$1"
+		tar xvzf ../"$1"
 		;;
 	*.tar.xz | *.txz)
-		tar xvJf "$1"
+		tar xvJf ../"$1"
 		;;
 	*.rar)
-		mkdir "$d_name"
-		cd "$d_name"
 		unrar e ../$1
 		;;
 	*.zip | *.7z)
-		mkdir "$d_name"
-		unzip "$1" -d ./$d_name
+		unzip ../"$1"
 esac
 
