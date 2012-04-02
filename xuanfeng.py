@@ -112,7 +112,7 @@ class XF:
             self.__gethttp()
             self.__creatfile()
             self.__deltask()
-            #self.__download()
+            self.__download()
         elif str.find('不正确') != -1:
             print('你输入的帐号或者密码不正确，请重新输入。')
         else:
