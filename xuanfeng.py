@@ -302,6 +302,6 @@ class XF:
 try:
     s = XF()
 except KeyboardInterrupt:
-    print (" exit now.")
+    print (" exit now\n")
     sys.exit()
 
