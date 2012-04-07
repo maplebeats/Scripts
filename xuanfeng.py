@@ -201,7 +201,7 @@ class XF:
                     self.filecom.append(re.search(r'\"com_cookie":\"(.+?)\"\,\"',str).group(1))
            
     def __chosetask(self):
-        print ("请选择操作,输入回车(Enter)下载任务\nA添加任务,D删除任务,O在线播放任务,R刷新离线任务列表")
+        print ("请选择操作,输入回车(Enter)继续上一次下载任务\nA添加任务,D删除任务,O在线播放任务,R刷新离线任务列表")
         inputs=raw_input()
         if inputs=="":
             self.__creatfile()
@@ -274,11 +274,12 @@ class XF:
 
     def __online(self):
         print("输入需要在线观看的任务序号")
-        num = int(raw_input())
+        num = int(raw_input())-1
         print("正在缓冲，马上开始播放")
         os.system(r"cd ~/videos/online;wget -c -O %s --header 'Cookie:FTN5K=%s' '%s'&sleep\
                         5;mplayer %s >/dev/null" %
                         (self.filename[num],self.filecom[num],self.filehttp[num],self.filename[num]))
+        os.system(r'killall wget')
         
     def __Login(self):
         """
@@ -302,6 +303,5 @@ try:
     s = XF()
 except KeyboardInterrupt:
     print (" exit now.")
-    os.system(r'killall wget')
     sys.exit()
 
