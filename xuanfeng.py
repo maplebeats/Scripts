@@ -10,6 +10,7 @@ except:
     from urllib import parse,request
     from http import cookiejar
 import random,time
+import threading as thread
 import json,os,sys,re
 try:
     raw_input
@@ -29,7 +30,7 @@ class XF:
                 'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0',\
     }
     __downpath = '%s/Downloads/xuanfeng.down'%os.path.expanduser("~")
-    __cookiepath = '%s/Downloads/cookie.xf'%os.path.expanduser("~")
+    __cookiepath = '/tmp/cookie.xf'
     __verifycode = None
     __http = {}
     __RE=re.compile("\d+")
@@ -192,6 +193,7 @@ class XF:
             urlv = 'http://lixian.qq.com/handler/lixian/get_http_url.php'
             self.filehttp = []
             self.filecom = []
+            print("请求杂七杂八的玩意ing")
             for num in range(len(self.filename)):
                     data = {'hash':self.filehash[num],'filename':self.filename[num],'browser':'other'}
                     str = self.__request(urlv,'POST',data)
@@ -199,7 +201,7 @@ class XF:
                     self.filecom.append(re.search(r'\"com_cookie":\"(.+?)\"\,\"',str).group(1))
            
     def __chosetask(self):
-        print ("请选择操作,输入回车(Enter)下载任务\nA添加任务,D删除任务,R刷新离线任务列表")
+        print ("请选择操作,输入回车(Enter)下载任务\nA添加任务,D删除任务,O在线播放任务,R刷新离线任务列表")
         inputs=raw_input()
         if inputs=="":
             self.__creatfile()
@@ -211,7 +213,9 @@ class XF:
             self.main()
         elif inputs.upper()=="R":
             self.main()
-
+        elif inputs.upper()=="O":
+            self.__online()
+            self.main()
 
     def __creatfile(self):
             """
@@ -267,7 +271,15 @@ class XF:
         str = self.__request(urlv,'POST',data)
     def __download(self):
         os.system("aria2c -i %s" % self.__downpath)
-                    
+
+    def __online(self):
+        print("输入需要在线观看的任务序号")
+        num = int(raw_input())
+        print("正在缓冲，马上开始播放")
+        os.system(r"cd ~/videos/online;wget -c -O %s --header 'Cookie:FTN5K=%s' '%s'&sleep\
+                        5;mplayer %s >/dev/null" %
+                        (self.filename[num],self.filecom[num],self.filehttp[num],self.filename[num]))
+        
     def __Login(self):
         """
         登录
@@ -290,5 +302,6 @@ try:
     s = XF()
 except KeyboardInterrupt:
     print (" exit now.")
+    os.system(r'killall wget')
     sys.exit()
 
