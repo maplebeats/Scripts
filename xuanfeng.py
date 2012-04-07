@@ -277,7 +277,7 @@ class XF:
         num = int(raw_input())-1
         print("正在缓冲，马上开始播放")
         os.system(r"cd ~/videos/online;wget -c -O %s --header 'Cookie:FTN5K=%s' '%s'&sleep\
-                        5;mplayer %s >/dev/null" %
+                        5;totem %s >/dev/null" %
                         (self.filename[num],self.filecom[num],self.filehttp[num],self.filename[num]))
         os.system(r'killall wget')
         
