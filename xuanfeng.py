@@ -1,42 +1,45 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import division
 import hashlib
-from urllib import request,parse
-from http import cookiejar
-import re,random,time
-import threading as th
-import json,os
+try:
+    import urllib as parse
+    import urllib2 as request
+    import cookielib as cookiejar
+except:
+    from urllib import parse,request
+    from http import cookiejar
+import random,time
+import json,os,sys,re
+try:
+    raw_input
+except:
+    raw_input=input
+def _(string):
+    try:
+        return string.decode("u8")
+    except:
+        return string
+
 class XF:
     """
      Login QQ
     """
     __headers ={
-                'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.9 Safari/534.30',\
-                'Referer':'http://ptlogin2.qq.com/login?u=445644667&p=11BDE88FB5BA931B10B808976DD6308D&verifycode=!ERV&aid=567008010&u1=http%3A%2F%2Flixian.qq.com%2Fmain.html&h=1&ptredirect=1&ptlang=2052&from_ui=1&dumy=&fp=loginerroralert&action=2-6-36444&mibao_css='\
+                'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0',\
     }
-    __cookiepath = '/tmp/cookie'
-    __downpath = '/home/maplebeats/Downloads/xuanfeng.down'
-    __qq = None
-    __pswd = None
+    __downpath = '%s/Downloads/xuanfeng.down'%os.path.expanduser("~")
+    __cookiepath = '%s/Downloads/cookie.xf'%os.path.expanduser("~")
     __verifycode = None
-    __clientid = 21628014
     __http = {}
-    __psessionid = ''
-    __ptwebqq = ''
-    __vfwebqq = ''
-    __skey = ''
-    __poll2 = None
-    __get_msg_tip = None
-    __rc = 0
-    __send_num = 31330000
-    def __init__(self):
-        self.httpproess()
-        self.__Login()
-        pass
+    __RE=re.compile("\d+")
     def __preprocess(self,password,verifycode):
         """
             QQ密码加密部份
         """
+
         return hashlib.md5( (self.__md5_3((password).encode('utf-8')) + (verifycode).upper()).encode('utf-8')).hexdigest().upper()
+
         pass
 
     def __md5_3(self,str):
@@ -45,21 +48,26 @@ class XF:
         """
         return hashlib.md5(hashlib.md5(hashlib.md5(str).digest()).digest()).hexdigest().upper()
         pass
-    def httpproess(self):
+    def __init__(self):
         """
             初始化模拟进程
         """
-        self.__http['cj'] = cookiejar.MozillaCookieJar(self.__cookiepath)
+        self.__http['cj'] = cookiejar.LWPCookieJar(self.__cookiepath)
+        if os.path.isfile(self.__cookiepath):
+            self.__http['cj'].load(ignore_discard=True, ignore_expires=True)
+
         self.__http['opener'] = request.build_opener(request.HTTPCookieProcessor(self.__http['cj']))
-        return self.__http
-        pass
+        if os.path.isfile(self.__cookiepath):
+            self.main()
+        else:
+            self.__Login()
     def __request(self,url,method='GET',data={},savecookie=False):
         """
             请求url
         """
         if (method).upper() == 'POST':
             data = parse.urlencode(data).encode('utf-8')
-            self.__http['req'] = request.Request(url,data,self.__headers)
+            self.__http['req'] = request.Request(url,data,headers=self.__headers)
         else:
             self.__http['req'] = request.Request(url=url,headers=self.__headers)
         fp = self.__http['opener'].open(self.__http['req'])
@@ -68,7 +76,7 @@ class XF:
         except UnicodeDecodeError:
             str = fp.read()
         if savecookie == True:
-            self.__http['cj'].save(ignore_discard=True,ignore_expires=True)
+            self.__http['cj'].save(ignore_discard=True, ignore_expires=True)
         fp.close()
         return str
         pass
@@ -88,7 +96,7 @@ class XF:
             @url:http://ptlogin2.qq.com/check?uin=644826377&appid=1003903&r=0.56373973749578
         """
         urlv = 'http://ptlogin2.qq.com/check?uin='+ ('%s' % self.__qq)+'&appid=1003903&r='+ ('%s' % random.Random().random())
-        str = self.__request(url = urlv, savecookie=True)
+        str = self.__request(url = urlv, savecookie=False)
         str = re.findall(r'\d|(?<=\')[a-zA-Z0-9\!]{4}',str)
         return str
         pass
@@ -101,26 +109,37 @@ class XF:
                     h:1  ptredirect:0   ptlang:2052  from_ui:1   pttype:1  dumy:
                     fp:loginerroralert   action:1-24-62651  mibao_css:m_webqq}
         """
-        urlv = 'http://ptlogin2.qq.com/login?u='+('%s' %  self.__qq) +'&' +  'p=' + ('%s' % self.__pswd) +  '&verifycode='+ ('%s' % self.__verifycode[1]) +'&remember_uin=1&aid=1003903' +  "&u1=http%3A%2F%2Flixian.qq.com%2Fmain.html" +  '&h=1&ptredirect=0&ptlang=2052&from_ui=1&pttype=1&dumy=&fp=loginerroralert'
+        urlv = 'http://ptlogin2.qq.com/login?u='+('%s' %  self.__qq) +'&' +  'p=' + ('%s' % self.__pswd) +  '&verifycode='+ ('%s' % self.__verifycode[1]) +'&aid=567008010' +  "&u1=http%3A%2F%2Flixian.qq.com%2Fmain.html" +  '&h=1&ptredirect=1&ptlang=2052&from_ui=1&dumy=&fp=loginerroralert'
         str = self.__request(url = urlv,savecookie=True)
-        if str.find('登录成功') != -1:
+        if str.find(_('登录成功')) != -1:
             #执行二次登录
-            self.__ptwebqq = self.__getcookies('ptwebqq')
-            self.__skey = self.__getcookies('skey')
             self.__getlogin()
-            self.__getlist()
-            self.__gethttp()
-            self.__creatfile()
-            self.__deltask()
-            self.__download()
-        elif str.find('不正确') != -1:
+            self.main()
+        elif str.find(_('不正确')) != -1:
             print('你输入的帐号或者密码不正确，请重新输入。')
         else:
             print('登录失败')
         pass
+
+    def main(self):
+        self.__getlist()
+        self.__gethttp()
+        self.__chosetask()
+        self.__download()
+
+    def getfilename_url(self,url):
+        url=url.strip()
+        filename=""
+        if url.startswith("ed2k"):
+            arr=url.split("|")
+            if len(arr)>=4:
+                filename=parse.unquote(arr[2])
+        else:
+            filename=url.split("/")[-1]
+        return filename.split("?")[0]
     def __getlogin(self):
-            urlv = 'http://lixian.qq.com/handler/lixian/do_lixian_login.php'
-            str = self.__request(url =urlv,method = 'POST')
+        urlv = 'http://lixian.qq.com/handler/lixian/do_lixian_login.php'
+        str = self.__request(url =urlv,method = 'POST',savecookie=True)
             #登陆旋风，可从str中得到用户信息
 
     def __getlist(self):
@@ -128,16 +147,43 @@ class XF:
             得到任务名与hash值
             """
             urlv = 'http://lixian.qq.com/handler/lixian/get_lixian_list.php'
-            str = self.__request(urlv,'POST')
-            str = json.JSONDecoder().decode(str)
-            self.filename = []
-            self.filehash = []
-            self.filemid = []
-            for num in range(len(str['data'])):
-                    self.filename.append(str['data'][num]['file_name'])
-                    self.filehash.append(str['data'][num]['hash'])
-                    self.filemid.append(str['data'][num]['mid'])
-                    print(self.filename[num])
+            res = self.__request(urlv,'POST',savecookie=False)
+            res = json.JSONDecoder().decode(res)
+            if res["msg"]==_('未登录!'):
+                self.__getlogin()
+                self.main()
+            elif not res["data"]:
+                print (_('无离线任务!'))
+                self.__addtask()
+                self.main()
+            else:
+                self.filename = []
+                self.filehash = []
+                self.filemid = []
+                print ("\n===================离线任务列表====================")
+                print ("序号\t大小\t进度\t文件名")
+                for num in range(len(res['data'])):
+                    index=res['data'][num]
+                    self.filename.append(index['file_name'].encode("u8"))
+                    self.filehash.append(index['hash'])
+                    size=index['file_size']
+                    self.filemid.append(index['mid'])
+                    if size==0:
+                        percent="-0"
+
+                    else:
+                        percent=str(index['comp_size']/size*100).split(".")[0]
+
+                    dw=["B","K","M","G"]
+                    for i in range(3):
+                        _dw=dw[i]
+                        if size>=1024:
+                            size=size/1024
+                        else:
+                            break
+                    size="%d%s"%(size,_dw)
+                    print ("%d\t%s\t%s%%\t%s"%(num+1,size,percent,_(self.filename[num])))
+                print ("=======================END=========================\n")
 
     def __gethttp(self):
             """
@@ -152,37 +198,83 @@ class XF:
                     self.filehttp.append(re.search(r'\"com_url\":\"(.+?)\"\,\"',str).group(1))
                     self.filecom.append(re.search(r'\"com_cookie":\"(.+?)\"\,\"',str).group(1))
            
+    def __chosetask(self):
+        print ("请选择操作,输入回车(Enter)下载任务\nA添加任务,D删除任务,R刷新离线任务列表")
+        inputs=raw_input()
+        if inputs=="":
+            self.__creatfile()
+        elif inputs.upper()=="A":
+            self.__addtask()
+            self.main()
+        elif inputs.upper()=="D":
+            self.__deltask()
+            self.main()
+        elif inputs.upper()=="R":
+            self.main()
+
+
     def __creatfile(self):
             """
             建立aria2下载文件
             """
+            print ("请输入要下载的任务序号,数字之间用空格,逗号或其他非数字字符号分割.\n输入A下载所有任务:")
+            target=raw_input().strip()
+            if target.upper()=="A":
+                lists=range(1,len(self.filehttp)+1)
+            else:
+                lists=self.__RE.findall(target)
+            if lists==[]:
+                print ("选择为空.")
+                self.__chosetask()
+                return
             f = open(self.__downpath,'w')
-            for num in range(len(self.filename)):
+            for num in lists:
+                try:
+                    num=int(num)-1
                     f.write(self.filehttp[num] + '\n  header=Cookie: FTN5K=' + self.filecom[num] +
                     '\n  continue=true\n  max-conection-per-server=5\n  split=10\n   parameterized-uri=true\n\n')
+                except:
+                    print (num+1 ,_(" 任务建立失败!"))
             f.close
-            print("aria2文件建立")
+            print("aria2输入文件建立")
 
     def __deltask(self):
-            urlv = 'http://lixian.qq.com/handler/lixian/del_lixian_task.php'
-            print("清空任务ing")
-            for num in range(len(self.filename)):
-                    data = {'mids':self.filemid[num]}
-                    str = self.__request(urlv,'POST',data)
-            print("任务删除完成")
+        print ("请输入要删除的任务序号,数字之间用空格,逗号或其他非数字字符号分割.\n输入A删除所有任务:")
+        target=raw_input().strip()
+        if target.upper()=="A":
+            lists=range(1,len(self.filehttp)+1)
+        else:
+            lists=self.__RE.findall(target)
+        if lists==[]:
+            print ("选择为空.")
+            self.__chosetask()
+        urlv = 'http://lixian.qq.com/handler/lixian/del_lixian_task.php'
+        for num in lists:
+                num=int(num)-1
+                data = {'mids':self.filemid[num]}
+                str = self.__request(urlv,'POST',data)
+        print("任务删除完成")
                     
+    def __addtask(self):
+        print ("请输入下载地址:")
+        url=raw_input()
+        filename=self.getfilename_url(url)
+        data={"down_link":url,\
+                "filename":filename,\
+                "filesize":0,\
+                }
+        urlv="http://lixian.qq.com/handler/lixian/add_to_lixian.php"
+        str = self.__request(urlv,'POST',data)
     def __download(self):
-            """
-            调用aria2进行下载
-            """
-            os.system(r'aria2c -i %s' % self.__downpath)      
+        os.system("aria2c -i %s" % self.__downpath)
                     
     def __Login(self):
         """
         登录
         """
-        self.__qq = input('QQ号：')
-        self.__pswd = input('QQ密码：')
+        if not hasattr(self,"__qq"):
+            self.__qq = raw_input('QQ号：')
+            self.__pswd = raw_input('QQ密码：')
         self.__qq = self.__qq.strip()
         self.__pswd = self.__pswd.strip()
         self.__verifycode = self.__getverifycode()
@@ -190,7 +282,13 @@ class XF:
             self.__pswd,#密码 \
             '%s' % self.__verifycode[1]  #验证码 \
         )
+        print ("登录中...")
         self.__request_login()
         pass
 
-s = XF()
+try:
+    s = XF()
+except KeyboardInterrupt:
+    print (" exit now.")
+    sys.exit()
+
