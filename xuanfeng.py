@@ -53,11 +53,12 @@ class XF:
             初始化模拟进程
         """
         self.__http['cj'] = cookiejar.LWPCookieJar(self.__cookiepath)
-        if os.path.isfile(self.__cookiepath):
+        if os.path.isfile(self.__cookiepath) and os.path.getctime(self.__cookiepath) + 1200 >\
+                        time.time():
             self.__http['cj'].load(ignore_discard=True, ignore_expires=True)
 
         self.__http['opener'] = request.build_opener(request.HTTPCookieProcessor(self.__http['cj']))
-        if os.path.isfile(self.__cookiepath) and os.path.getctime(self.__cookiepath) + 3600 >\
+        if os.path.isfile(self.__cookiepath) and os.path.getctime(self.__cookiepath) + 1200 >\
                         time.time():
             self.main()
         else:
