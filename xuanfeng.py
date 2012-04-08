@@ -10,7 +10,6 @@ except:
     from urllib import parse,request
     from http import cookiejar
 import random,time
-import threading as thread
 import json,os,sys,re
 try:
     raw_input
@@ -58,7 +57,8 @@ class XF:
             self.__http['cj'].load(ignore_discard=True, ignore_expires=True)
 
         self.__http['opener'] = request.build_opener(request.HTTPCookieProcessor(self.__http['cj']))
-        if os.path.isfile(self.__cookiepath):
+        if os.path.isfile(self.__cookiepath) and os.path.getctime(self.__cookiepath) + 3600 >\
+                        time.time():
             self.main()
         else:
             self.__Login()
@@ -80,17 +80,6 @@ class XF:
             self.__http['cj'].save(ignore_discard=True, ignore_expires=True)
         fp.close()
         return str
-        pass
-    def __getcookies(self,name):
-        fp = open(self.__cookiepath)
-        fp.seek(130)
-        for read in fp.readlines():
-            str = read.split(name)
-            if len(str) == 2:
-                fp.close()
-                return str[1].strip()
-        fp.close()
-        return None
         pass
     def __getverifycode(self):
         """
@@ -216,6 +205,7 @@ class XF:
         elif inputs.upper()=="O":
             self.__online()
             self.main()
+            self.__getlogin()
 
     def __creatfile(self):
             """
@@ -236,7 +226,7 @@ class XF:
                 try:
                     num=int(num)-1
                     f.write(self.filehttp[num] + '\n  header=Cookie: FTN5K=' + self.filecom[num] +
-                    '\n  continue=true\n  max-conection-per-server=5\n  split=10\n   parameterized-uri=true\n\n')
+                    '\n  continue=true\n  max-conection-per-server=5\n  split=10\n  parameterized-uri=true\n\n')
                 except:
                     print (num+1 ,_(" 任务建立失败!"))
             f.close
