@@ -66,7 +66,7 @@ class push:
 
     def __init__(self,filename,title):
         if input('push?(yes/y)').lower() == ('yes' or 'y'):
-            os.system(r'cd %s;git add %s;git commit -a -m \"%s %s\";git push'%(gitdir,filename,time.asctime(),title))
+            os.system(r'cd %s;git add %s;git commit -a -m "%s %s";git push'%(gitdir,filename,time.asctime(),title))
         else:
            sys.exit()
             
