@@ -1,8 +1,8 @@
 playV                       --play videos
-flash_jekyll                --refresh jekyll's html files
 shakefile                   --add new post to my blog
 extract                     --extract archive
 xuanfeng.py                 --download all the li xian tasks
 RmColon.py                  --rename a file without ':'
 tab2space.py                --tab=4spaces
 postimg.py                  --rm flickr img label
+newpost.py                  --add new post to my blog,too
