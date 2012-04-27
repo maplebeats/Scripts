@@ -60,8 +60,7 @@ class XF:
      Login QQ
     """
 
-    proxy="219.246.90.196:7777"
-    __downpath = os.path.expanduser("~/下载")
+    __downpath = os.path.expanduser("~/videos")
     try:
         os.makedirs(__downpath)
     except:
@@ -70,8 +69,8 @@ class XF:
     __headers ={
                 'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20120414 Firefox/13.0a2',\
     }
-    __cookiepath = '%s/cookie'%module_path
-    __verifyimg  = '%s/verify.jpg'%module_path
+    __cookiepath ='/tmp/cookie'# '%s/cookie'%module_path
+    __verifyimg  ='/tmp/verify.jpg'# '%s/verify.jpg'%module_path
     __verifycode = None
     __http = {}
     __RE=re.compile("\d+")
