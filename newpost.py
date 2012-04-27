@@ -4,7 +4,7 @@ import time,os,sys
 import re
 import platform
 
-format = "textile"
+format = ".textile"
 if platform.system()=='Linux':
     editor = "gedit"
     dir = "/home/maplebeats/works/maplebeats.github.com/_posts/"
@@ -24,15 +24,15 @@ class Lable:
         
     def filename(self):
         filetime = time.localtime()
-        return self.filetitle + '-%s-%s-%s'%(filetime[:3]) + '.' + format
+        return '%s-%s-%s-'%filetime[:3] + self.filetitle + format
         
     def filehead(self):
-        head = "---\nyaout: post\ntitle: %s\nsummary: %s\n---"%(self.posttile,self.summary)
+        head = "---\nlayout: post\ntitle: %s\nsummary: %s\n---"%(self.posttile,self.summary)
         return head
         
     def fileend(self):
         posttime = time.asctime()
-        return '*(data)Posted on %s by "maplebeats":http://maplebeats.com/me*'%posttime
+        return 'p(data). Posted on %s by "maplebeats":http://maplebeats.com/me'%posttime
         
 class Post:
  
@@ -64,9 +64,9 @@ class Transition:
         
 class push:
 
-    def __init__(self,title):
+    def __init__(self,filename,title):
         if input('push?(yes/y)').lower() == ('yes' or 'y'):
-            os.system(r'cd %s;git add .;git commit -a -m \"%s %s\";git push'%(gitdir,time.asctime(),title))
+            os.system(r'cd %s;git add %s;git commit -a -m \"%s %s\";git push'%(gitdir,filename,time.asctime(),title))
         else:
            sys.exit()
             
@@ -80,6 +80,6 @@ if __name__ == "__main__":
         tran = Transition()
         content = tran.postimg(content)
     with open(dir + lable.filename(),'w') as f:
-        f.write('%s\n%s\n%s'%(lable.filehead(),content,lable.fileend()))
-    push(title)
+        f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
+    push(lable.filename,title)
  
