@@ -32,7 +32,7 @@ class Lable:
         
     def fileend(self):
         posttime = time.asctime()
-        return 'p(data). Posted on %s by "maplebeats":http://maplebeats.com/me'%posttime
+        return 'p(date). Posted on %s by "maplebeats":http://maplebeats.com/me'%posttime
         
 class Post:
  
