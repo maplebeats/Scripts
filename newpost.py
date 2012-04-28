@@ -82,4 +82,3 @@ if __name__ == "__main__":
     with open(dir + lable.filename(),'w') as f:
         f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
     push(lable.filename,title)
- 
