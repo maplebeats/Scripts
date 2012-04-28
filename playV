@@ -44,7 +44,8 @@ skip_open(){
 }
 
 skip_end(){
-    sleep $end_time && killall mplayer<<<'q' >/dev/null 2>&1 && sed -i '1d' anime.lst && play_video >/dev/null
+    killall sleep #防止多余的sleep影响
+    sleep $end_time && killall mplayer >/dev/null 2>&1 && sed -i '1d' anime.lst && play_video >/dev/null
 }
 
 play_video(){
@@ -63,6 +64,6 @@ if [ -f ./anime.lst ]
 then
     play_video
 else
-     creat_lst
+    creat_lst
     play_video
 fi

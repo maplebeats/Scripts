@@ -18,7 +18,7 @@ $editor `date +%F-$name_file.textile`
 
 echo "Are you sure to push to github?(N)"
 read ans
-echo "p(data). Posted on `date +%c` by \"maplebeats\":http://maplebeats.com/me" >> `date +%F-$name_file.textile`
+echo "p(date). Posted on `date +%c` by \"maplebeats\":http://maplebeats.com/me" >> `date +%F-$name_file.textile`
 case "$ans" in 
 	n* | N* )
 		exit 0
