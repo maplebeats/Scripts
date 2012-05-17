@@ -7,3 +7,4 @@ tab2space.py                --tab=4spaces
 postimg.py                  --rm flickr img label
 newpost.py                  --add new post to my blog,too
 merge.py                    --merge files
+optirun.sh                  --optirun
