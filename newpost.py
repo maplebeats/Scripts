@@ -7,9 +7,9 @@ import platform
 format = ".textile"
 if platform.system()=='Linux':
     editor = "gedit"
-    dir = "/home/maplebeats/works/maplebeats.github.com/_posts/"
+    dir = "/home/maplebeats/Works/maplebeats.github.com/_posts/"
     tmpfile = "/tmp/post"
-    gitdir = "/home/maplebeats/works/maplebeats.github.com/"
+    gitdir = "/home/maplebeats/Works/maplebeats.github.com/"
 else:
     editor = 'notepad'
     dir = 'c:\\'
@@ -76,9 +76,9 @@ if __name__ == "__main__":
     post = Post()
     summary,content = post.edit()
     lable = Lable(file_title,title,summary)
-    if content.find('flick') != -1:
-        tran = Transition()
-        content = tran.postimg(content)
+   # if content.find('flick') != -1:
+   #     tran = Transition()
+   #     content = tran.postimg(content)
     with open(dir + lable.filename(),'w') as f:
         f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
     push(lable.filename,title)
