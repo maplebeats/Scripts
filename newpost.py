@@ -52,9 +52,10 @@ class Transition:
         try:
             if test and test.group(3) > '300':
                 if test.group(3) > test.group(4):
-                    content = img.sub(r'\1"400">',content)
+                     content = img.sub(r'\1"400">',content)
                 else:
                     content = img.sub(r'\1"650">',content)
+            return content
         except:    
             return content
         
@@ -76,9 +77,9 @@ if __name__ == "__main__":
     post = Post()
     summary,content = post.edit()
     lable = Lable(file_title,title,summary)
-   # if content.find('flick') != -1:
-   #     tran = Transition()
-   #     content = tran.postimg(content)
+    if content.find('flick') != -1:
+        tran = Transition()
+        content = tran.postimg(content)
     with open(dir + lable.filename(),'w') as f:
         f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
     push(lable.filename,title)
