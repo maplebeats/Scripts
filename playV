@@ -44,7 +44,7 @@ skip_open(){
 }
 
 skip_end(){
-    killall sleep #防止多余的sleep影响
+    killall sleep >/dev/null #防止多余的sleep影响
     sleep $end_time && killall mplayer >/dev/null 2>&1 && sed -i '1d' anime.lst && play_video >/dev/null
 }
 
