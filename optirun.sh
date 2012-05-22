@@ -4,4 +4,4 @@
 #Tips: I can't ensure it's correctness
 
 optirun $1
-sudo rm /dev/nvidia*
+sudo rm /dev/nvidia0 /dev/nvidiactl
