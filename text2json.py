@@ -6,6 +6,6 @@ text2josn.py < text > text.json
 import fileinput
 print("[")
 for line in fileinput.input():
-    line = line.rstrip()
-    print('{\n"anime":"'+line+'"')
+    anime = line.rstrip().split('》')
+    print('{\n"cn":"'+anime[0]+'》"\n"jp":"'+anime[1]+'"')
 print("]")
