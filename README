@@ -1,10 +1,1 @@
-playV                       --play videos
-shakefile                   --add new post to my blog
-extract                     --extract archive
-xuanfeng.py                 --download all the li xian tasks
-RmColon.py                  --rename a file without ':'
-tab2space.py                --tab=4spaces
-postimg.py                  --rm flickr img label
-newpost.py                  --add new post to my blog,too
-merge.py                    --merge files
-optirun.sh                  --optirun
+写的一些破脚本，都是平时用到了然后记下来存放而已。

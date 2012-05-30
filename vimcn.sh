@@ -1,6 +1,6 @@
 #!/bin/bash
-
-#贴代码，贴图片！
+#vimcn.sh tager
+#po code or img
 
 ename=${1##*.}
 if [ "$ename" = "png" ] || [ "$ename" = "jpg" ] ;then

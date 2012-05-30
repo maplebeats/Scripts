@@ -1,5 +1,6 @@
 #!/bin/bash
-#maplebeats'shell
+#play videos with mplayer
+#use anime.tm and anime.lst
 
 temp_file=/tmp/playV.$$
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+#creat a new post to my blog
+#newpost.py is better than this
 LANG=zh
 dir=~/works/maplebeats.github.com/_posts
 cd $dir

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+'''
+$merge.py
+find out all the files and merge them in a html file
+'''
 import os
 def check(walk):
     for i in walk:

@@ -1,5 +1,7 @@
 ﻿#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+'''
+creat new post to my blog
+'''
 import time,os,sys
 import re
 import platform
