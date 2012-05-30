@@ -1,4 +1,4 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 import urllib.request as ur
 import re,time
 def getip():
