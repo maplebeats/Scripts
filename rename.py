@@ -1,4 +1,4 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 '''
 rename.py name file1 file2 ...
 '''

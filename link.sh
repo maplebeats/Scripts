@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 #link.sh file
 dropbox="/home/maplebeats/Dropbox/Public/"
 
