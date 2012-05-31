@@ -68,11 +68,19 @@ class Transition:
 class push:
 
     def __init__(self,filename,title):
+        self.filename = filename
+        self.title = title
+    
+    def push(self): 
         if input('push?(yes/y)').lower() == ('yes' or 'y'):
-            os.system(r'cd %s;git add %s;git commit -a -m "%s %s";git push'%(gitdir,filename,time.asctime(),title))
+            os.system(r'cd %s;git add %s;git commit -a -m "%s %s";git push'%(gitdir,self.filename,time.asctime(),self.title))
         else:
            sys.exit()
-            
+
+    def view(self):
+        os.system(r'%s %s%s'%(editor,dir,self.filename))
+        self.push()
+           
 if __name__ == "__main__":
     file_title = '-'.join(input("输入文章短链名:").split(' '))
     title = input("输入文章标题:")
@@ -84,4 +92,5 @@ if __name__ == "__main__":
         content = tran.postimg(content)
     with open(dir + lable.filename(),'w') as f:
         f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
-    push(lable.filename,title)
+    p = push(lable.filename,title)
+    p.view()
