@@ -43,7 +43,9 @@ class Post:
             f.write('')
         os.system(r'%s %s'%(editor,tmpfile))
         summary = open('%s'%tmpfile,'r').readline().rstrip()
-        content = open('%s'%tmpfile,'r').read().rstrip()
+        content = open('%s'%tmpfile,'r').readlines()
+        content.pop(0)
+        content = ''.join(content)
         return summary,content
         
 class Transition:
@@ -92,5 +94,5 @@ if __name__ == "__main__":
         content = tran.postimg(content)
     with open(dir + lable.filename(),'w') as f:
         f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
-    p = push(lable.filename,title)
+    p = push(lable.filename(),title)
     p.view()
