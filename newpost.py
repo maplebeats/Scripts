@@ -72,6 +72,8 @@ class push:
     def __init__(self,filename,title):
         self.filename = filename
         self.title = title
+        self.view()
+        self.push()
     
     def push(self): 
         if input('push?(yes/y)').lower() == ('yes' or 'y'):
@@ -81,7 +83,6 @@ class push:
 
     def view(self):
         os.system(r'%s %s%s'%(editor,dir,self.filename))
-        self.push()
            
 if __name__ == "__main__":
     file_title = '-'.join(input("输入文章短链名:").split(' '))
@@ -95,4 +96,3 @@ if __name__ == "__main__":
     with open(dir + lable.filename(),'w') as f:
         f.write('%s\n%s\n\n%s'%(lable.filehead(),content,lable.fileend()))
     p = push(lable.filename(),title)
-    p.view()
