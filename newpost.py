@@ -42,7 +42,7 @@ class Post:
         with open('%s'%tmpfile,'w') as f:
             f.write('')
         os.system(r'%s %s'%(editor,tmpfile))
-        summary = open('%s'%tmpfile,'r').readline().rstrip()
+        summary = open('%s'%tmpfile,'r').readline().rstrip().replace('"',"'") #ensure json
         content = open('%s'%tmpfile,'r').readlines()
         content.pop(0)
         content = ''.join(content)
