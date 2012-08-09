@@ -8,7 +8,7 @@ import platform
 
 format = ".textile"
 if platform.system()=='Linux':
-    editor = "gedit"
+    editor = "leafpad"
     dir = "/home/maplebeats/Works/maplebeats.github.com/_posts/"
     tmpfile = "/tmp/post"
     gitdir = "/home/maplebeats/Works/maplebeats.github.com/"
