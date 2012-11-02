@@ -15,7 +15,7 @@ case $1 in
 		tar xvJf ../"$1"
 		;;
 	*.rar)
-		unrar e ../$1
+		unrar x ../$1
 		;;
 	*.zip | *.7z)
 		unzip ../"$1"
