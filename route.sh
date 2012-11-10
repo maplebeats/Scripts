@@ -17,7 +17,7 @@ addlan(){
 }
 
 wifigw(){
-    route -n |grep -Eo '125\.[0-9]+\.[0-9]+\.[0-1]'|sed 's/\.0/\.1/g'|sort -u
+    route -n |grep -Eo '125\.[0-9]+\.[0-9]+\.[0-1]'|sed 's/0$/1/g'|sort -u
 }
 
 wifi=`wifigw`
