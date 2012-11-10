@@ -2,7 +2,7 @@
 
 #define LIGHT 500
 
-void main(void)
+int main(int argc,char *argv[])
 {
     FILE *fp;
     if(!(fp=fopen("/sys/class/backlight/intel_backlight/brightness","wb")))
@@ -10,5 +10,6 @@ void main(void)
     else
         fputs("LIGHT\n",fp);
     fclose(fp);
+    return 0;
 }
 
