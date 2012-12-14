@@ -8,4 +8,4 @@ else
     ctime=$1
 fi
 
-find "$logdir" -ctime "$ctime" -type f -exec sed -e "s/.*<b>\(.*\)<\/b>.*;'>\(.*\)<\/span><br\/>/\1\2/g" -e "s/<html>.*<\/h3>/~~~~~~~~~~~~~~~~/g" {} \;
+find "$logdir" -ctime "$ctime" -type f -exec sed -e "s/.*<b>\(.*\)<\/b>.*;'>\(.*\)<\/span><br\/>/\1\2/g" -e "s/<html>.*<\/h3>/~~~~~~~~~~~~~~~~/g" -e "s/<\/body><\/html>//g" {} \;
