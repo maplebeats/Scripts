@@ -10,17 +10,15 @@
 #
 # Description: 呃
 #
-
-addlan(){
+[[ $(id -u) != 0 ]] && echo "must root" && exit 0
+addlan () {
     route add -net 172.0.0.0 netmask 255.0.0.0 gw 172.18.116.1
     route add -net 202.202.0.0 netmask 255.255.0.0 gw 172.18.116.1
 }
 
-wifigw(){
-    route -n |grep -Eo '125\.[0-9]+\.[0-9]+\.[0-1]'|sed 's/0$/1/g'|sort -u
+wifigw () {
+    route -n |awk '{if($8=="wlan0") if($1!="0.0.0.0") print $1}'|sed 's/.[0-255]$/.1/g'|uniq
 }
-
-wifi=`wifigw`
-route add default gw $wifi
+route add default gw $(wifigw)
 route del default lan0
 addlan
