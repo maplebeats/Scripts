@@ -5,7 +5,7 @@ ex () {
     bname=$(basename "$1")
     name=${bname%%.*}
 
-    [ -d "$name" ] && echo "已经解压过了$name" && exit 0
+    [ -d "$name" ] && echo "已经解压过了$name了" && return 1
 
     mkdir "$name" && cd "$name"
     

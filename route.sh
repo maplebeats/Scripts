@@ -10,7 +10,7 @@
 #
 # Description: 呃
 #
-[[ $(id -u) != 0 ]] && echo "must root" && exit 0
+[[ $(id -u) != 0 ]] && echo "must root" && exit 1
 addlan () {
     route add -net 172.0.0.0 netmask 255.0.0.0 gw 172.18.116.1
     route add -net 202.202.0.0 netmask 255.255.0.0 gw 172.18.116.1
