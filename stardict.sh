@@ -12,5 +12,5 @@ do
         notify-send -a 'dict' -i $icon "$w" "${tran:0:300}"
     fi
     echo $w >/tmp/dict.tmp
-    mplayer "$speakdir"/z_"$w"__gb_1.wav
+    mplayer "$speakdir"/z_"$w"__gb_1.wav >/dev/null 2>&1
 done

@@ -14,6 +14,7 @@
 addlan () {
     route add -net 172.0.0.0 netmask 255.0.0.0 gw 172.18.116.1
     route add -net 202.202.0.0 netmask 255.255.0.0 gw 172.18.116.1
+    route add -host 123.58.173.89 gw 172.18.116.1  #163源,妹的pacman不认
 }
 
 wifigw () {
