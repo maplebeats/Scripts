@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        baidu
 // @namespace   baidu
-// @description 抢第一个签到用的。。
+// @description 抢第一个和自动签到
 // @include     http://tieba.baidu.com/f?kw=*
 // @include     http://tieba.baidu.com/f?*&kw=*
 // @version     0.1
@@ -37,8 +37,12 @@ function srequest(){
     }
 }
 var d = new Date();
-var t = (23-d.getHours())*24*60*1000 + (60-d.getMinutes())*60*1000 + (1000-d.getMilliseconds());
-var s = setTimeout(srequest, t);
+var t = (60-d.getMinutes())*60*1000 + (1000-d.getMilliseconds());
+if(t>0 && d.getHours>0){
+    var s = setTimeout(srequest, t);
+}else{
+    srequest();
+}
 
 //事件型
 window.addEventListener('load', sign, false);
