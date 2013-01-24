@@ -19,14 +19,14 @@ var is_sign=unsafeWindow.PageData.is_sign_in;
 var data = {ie:"=utf-8", kw:bar_name, tbs:tbs };
 
 function sign(){
-	if(is_like&&!is_sign){
-		$.post("http://tieba.baidu.com/sign/add", data, function callback(Ajax_data){
-			if(!Ajax_data.error){
-				is_sign=1;
-                location.reload();
-			}
-		},"json");
-	}
+   if(is_like&&!is_sign){
+      $.post("http://tieba.baidu.com/sign/add", data, function callback(Ajax_data){
+         if(!Ajax_data.error){
+            is_sign=1;
+            location.reload();
+         }
+      },"json");
+   }
     return false;
 }
 var scount = 1;
