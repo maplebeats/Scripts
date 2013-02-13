@@ -23,6 +23,7 @@ def run(handler=MyHTTPhandler, server=HTTPServer, port=8000):
     except KeyboardInterrupt:
         print("close")
         httpd.server_close()
+
 if __name__ == '__main__':
     import sys
     if len(sys.argv) == 2:
