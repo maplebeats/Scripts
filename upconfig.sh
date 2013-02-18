@@ -10,6 +10,7 @@ update() {
 
 push() {
     cd $cdir
+    git pull
     git commit -a -m "update config `date`"
     git push
 }
