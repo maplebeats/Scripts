@@ -5,7 +5,7 @@ import re
 import sys
 
 du = 'http://dict.baidu.com/s?wd='
-wubi = re.compile(r'<p>五笔(?:86|98): ([a-y]{1,4})</p>')
+wubi = re.compile(r'<p>(.{2,6}?: .*?)</p>')
 
 def fetch(w):
     url = du + request.quote(w) 
@@ -18,5 +18,4 @@ if len(sys.argv) < 2:
 for i in sys.argv[1:]:
     for j in i:
         w = fetch(j)
-        print(j+':')
-        print("86版五笔:{0}\n98版五笔:{1}\n".format(*w))
+        print("\x1B[1;45m{0}:\n{1}\n{2}\n{3}\n{4}\x1B[0m".format(j, w[4],w[9], w[10], w[12]))
