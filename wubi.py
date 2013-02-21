@@ -17,5 +17,6 @@ if len(sys.argv) < 2:
     raise TypeError("参数过少")
 for i in sys.argv[1:]:
     for j in i:
-        w = fetch(i)
+        w = fetch(j)
+        print(j+':')
         print("86版五笔:{0}\n98版五笔:{1}\n".format(*w))
