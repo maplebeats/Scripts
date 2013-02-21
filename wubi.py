@@ -13,6 +13,9 @@ def fetch(w):
         r = r.read().decode('utf-8')
         return wubi.findall(r)
 
+if len(sys.argv) < 2:
+    raise TypeError("参数过少")
 for i in sys.argv[1:]:
-    w = fetch(i)
-    print("86版五笔:{0}\n98版五笔:{1}\n\n".format(*w))
+    for j in i:
+        w = fetch(i)
+        print("86版五笔:{0}\n98版五笔:{1}\n".format(*w))
