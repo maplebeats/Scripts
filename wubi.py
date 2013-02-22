@@ -11,11 +11,18 @@ def fetch(w):
     url = du + request.quote(w) 
     with request.urlopen(url) as r:
         r = r.read().decode('utf-8')
-        return wubi.findall(r)
+        d = wubi.findall(r)
+    w = {k:v for k,v in (i.split(': ') for i in d )}
+    return w
 
 if len(sys.argv) < 2:
     raise TypeError("参数过少")
 for i in sys.argv[1:]:
     for j in i:
         w = fetch(j)
-        print("\x1B[1;45m{0}:\n{1}\n{2}\n{3}\n{4}\x1B[0m".format(j, w[4],w[9], w[10], w[12]))
+        w.update({'字':j})
+        print(w)
+        print("""\x1B[1;45m{字}:
+五笔码:{五笔98}
+分解:{汉字首尾分解}
+笔顺:{笔顺读写}\x1B[0m""".format(**w))
