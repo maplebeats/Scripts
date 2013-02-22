@@ -21,7 +21,6 @@ for i in sys.argv[1:]:
     for j in i:
         w = fetch(j)
         w.update({'字':j})
-        print(w)
         print("""\x1B[1;45m{字}:
 五笔码:{五笔98}
 分解:{汉字首尾分解}
