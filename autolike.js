@@ -22,10 +22,15 @@ function getlikeobj()
     return like;
 }
 
-function autolike()
+function getiframelikeobj()
+{
+    var like = jQuery("iframe").contents().find("[data-clicklog='like'][class='item qz_like_btn_v3']");
+    return like;
+}
+
+function autolike(obj)
 {
     console.log("auto:like");
-    var obj = getlikeobj();
     var len = obj.length;
     var i = 0;
     for(i;i<len;i++){
@@ -36,7 +41,11 @@ function autolike()
 function main()
 {
     var inter = setInterval(function(){
-        autolike();
+        var obj = getlikeobj();
+        if(obj.length == 0){
+            obj = getiframelikeobj();
+        }
+        autolike(obj);
     },3000);
     var inter = setInterval(function(){
         refresh();
