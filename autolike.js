@@ -4,6 +4,7 @@
 // @description QQ空间自动点赞
 // @include     http://user.qzone.qq.com*
 // @version     1.1
+// @downloadURL https://raw.githubusercontent.com/maplebeats/Scripts/master/autolike.js
 // @grant       none
 // @Author      maplebeats
 // @mail        maplebeats@gmail.com
