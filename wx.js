@@ -3,9 +3,8 @@
 // @namespace   wx
 // @description wx自动跳转
 // @include     http://*support.weixin.qq.com/cgi-bin/*
-// @downloadURL='https://raw.githubusercontent.com/maplebeats/Scripts/master/wx.js'
-//
-// @version     0.0.1
+// @downloadURL https://raw.githubusercontent.com/maplebeats/Scripts/master/wx.js
+// @version     0.0.2
 // @Author: maplebeats
 // @mail: maplebeats@gmail.com
 // @run-at document-end
