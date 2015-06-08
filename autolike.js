@@ -38,6 +38,20 @@ function autolike(obj)
     }
 }
 
+function inter()
+{
+    if(localStorage.fresh && localStorage.auto){
+        ;
+    }
+    localStorage.fresh=3000;
+    localStorage.auto=30000;
+    table+='<div id="autolike" class="position:absolute">'+
+        '<table>'+
+            
+        '</table>'+
+        '</div>';
+    $("body").append(table);
+}
 function main()
 {
     var inter = setInterval(function(){
