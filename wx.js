@@ -13,8 +13,8 @@
 var url_div = document.getElementsByClassName("url");
 var url = url_div[0].innerHTML;
 console.log(url);
-document.getElementsByClassName("url")[0].innerHTML='<a id="target" href="'+url+'">'+url+'</a>';
+document.getElementsByClassName("url")[0].innerHTML='<a id="target" href="'+url+'">自动跳转</a>';
 var a = document.getElementById("target");
 var evt = document.createEvent("MouseEvents");
-evt.initEvent("click", true, true); 
-a.dispatchEvent(evt); 
+evt.initEvent("click", true, true);
+a.dispatchEvent(evt);
